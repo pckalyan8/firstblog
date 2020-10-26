@@ -1,0 +1,10 @@
+{% extends 'blog/layout.html' %}
+{% block content %}
+    <h1>About Me</h1>
+    <name>{{auser.id}}<br>
+        {{auser}}<br>
+        {{auser.email}}<br>
+    </name>
+    <br/>
+    <a href="{% url 'blog:blog-index' %}">Home</a>
+{% endblock %}

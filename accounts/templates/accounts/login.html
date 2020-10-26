@@ -1,0 +1,36 @@
+{% extends 'blog/layout.html' %}
+
+{% block content %}
+    <div class="content-section">
+        <legend class="border-bottom mb-4">LogIn</legend>
+        <Form method="POST">
+            {% csrf_token %}
+            {% for field in login_form %}
+            <fieldset class="form-group">
+                <p>
+                    {{field.label_tag}}
+                    {{field}}
+                    {% if field.help_text %}
+                        <small style="color:grey;">{{field.help_text}}</small>
+                    {% endif %}
+                    {% if login_form.non_field_errors %}
+                        <p style="color:magenta;">{{error}}</p>
+                    {% endif %}
+                </p>
+            </fieldset>
+            {% endfor %}
+
+            {% for error in field.errors %}
+                <p style="color:red;">{{error}}</p>
+            {% endfor %}
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Log In</button>
+            </div>
+        </Form>
+        <div class="order-top pt-3">
+            <small class="text-muted">
+                Don't Have An Account?<a class="ml-2" href="{% url 'accounts:accounts-register' %}">Sign Up</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}

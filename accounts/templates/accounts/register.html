@@ -1,0 +1,33 @@
+{% extends 'blog/layout.html' %}
+
+{% block content %}
+    <div class="content-section">
+        <legend class="border-bottom mb-4">Join Today</legend>
+        <Form method="POST">
+            {% csrf_token %}
+            {% for field in registration_form %}
+            <fieldset class="form-group">
+                <p>
+                    {{field.label_tag}}
+                    {{field}}
+                    {% if field.help_text %}
+                        <small style="color:grey;">{{field.help_text}}</small>
+                        
+                    {% endif %}
+                </p>
+            </fieldset>
+            {% endfor %}
+            {% for error in field.errors %}
+                <p style="color:red;">{{error}}</p>
+            {% endfor %}
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </Form>
+        <div class="order-top pt-3">
+            <small class="text-muted">
+                Already Have An Account?<a class="ml-2" href="{% url 'accounts:accounts-login' %}">Sign In</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}
